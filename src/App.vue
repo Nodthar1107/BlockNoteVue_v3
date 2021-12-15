@@ -25,5 +25,7 @@ export default {
 
 body{
   background-color: rgb(233, 233, 233);
+  height: fit-content;
 }
+
 </style>

@@ -8,6 +8,9 @@
                 v-bind:project_name="response.project_name"
                 v-bind:id="response.project_id"
                 v-bind:blocks="this.response.blocks_headers"
+                v-on:setContentInEditArea="setContentInEditArea"
+                v-on:removeBlock="removeBlock"
+                v-on:blockEditArea="blockEditArea"
             />
         </div>
     </div>
@@ -53,7 +56,10 @@ export default {
             {
                 this.project_name = this.response.project_name
                 this.project_struct = this.response.blocks_headers
+                this.project_struct.sort((prev, next) => prev.struct_number - next.struct_number);
+                console.log(this.project_struct)
                 this.id = this.response.project_id
+                this.$emit("setProjectId", this.id)
             }
     },
     methods: {
@@ -71,6 +77,15 @@ export default {
                 console.log(cookies)
             })
             this.$router.push("/login")
+        },
+        setContentInEditArea(block_id){
+            this.$emit("setContentInEditArea", block_id)
+        },
+        removeBlock(){
+            this.$emit("removeBlock")
+        },
+        blockEditArea(){
+            this.$emit("blockEditArea")
         }
     }
 }
